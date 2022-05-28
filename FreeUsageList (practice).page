@@ -1,0 +1,124 @@
+<apex:page controller="" showHeader="false" standardStylesheets="false">
+    <style>
+        .allWrapper {
+            /* Comment */
+            width: 820px;
+            margin: 0 auto;
+            border-spacing: 1;
+            border-collapse: collapse;
+            background: white;
+            overflow: hidden;
+            position: relative;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+    
+        .headerPageBlock {
+            font-family: arial, sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff !important;
+            text-align: center;
+            text-transform: uppercase;
+            background: #4a4e69;
+            display: block;
+            padding: 10px;
+            margin: 0;
+        }
+    
+        .dataTable table {
+            width: 100%;
+            font-family: arial, sans-serif;
+            border: solid 0.01px black;
+            border-collapse: collapse;
+        }
+    
+        .dataTable th {
+            background: #c9ada7;
+            border-top: solid 1px #4a4e69;
+            border-right: solid 0.01px black;
+            color: black;
+            font-size: 0.8em;
+            font-weight: normal;
+            padding: 11px 2px 10px 5px;
+        }
+    
+        .dataTable td {
+            border-top: solid 0.01px black;
+            border-right: solid 0.01px black;
+            color: black;
+            text-align: center;
+            font-size: 13px;
+            padding: 5px 2px 5px 5px;
+        }
+    
+        .actionBtnWrapper {
+            float: right;
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+    
+        .actionBtnWrapper .btn {
+            padding: 8px;
+            background: #685369;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            font-family: arial, sans-serif;
+            text-align: center;
+            text-decoration: none;
+            border-style: none;
+            border-bottom-style: solid;
+            border-radius: 5px;
+            transition: 0.5s ease-in-out;
+            cursor: pointer;
+        }
+    
+        .actionBtnWrapper .btn:hover {
+            color: #fff;
+            text-decoration: none;
+            background: #9a8c98;
+        }
+    
+        a:hover {
+            cursor: pointer;
+        }
+    </style>
+    
+    <apex:form styleClass="allWrapper">
+        <apex:actionFunction name="DelRecordAction" action="{}" >
+            <apex:param assignTo="{}" name="prm" />
+        </apex:actionFunction>
+        
+        <script>
+        function deleteRow(recordId) {            
+            var r = confirm("Are you sure want to delete ?");
+            if (r) {
+                DelRecordAction(recordId);
+            }
+        }    
+        </script>
+        
+        <apex:outputPanel styleClass="dataTable"> 
+            <apex:pageBlock id="FreeUsage_list">
+                <h2 class="headerPageBlock">Free Usage List</h2>
+                <apex:pageBlockTable value="{}" var="">
+                    <apex:column value="{}"/>
+                        <apex:column >
+                            <apex:facet name="header">Actions</apex:facet>
+                            <apex:outputLink value="/apex/FreeUsageNewAndExisting?&ID={}">
+                                 <apex:image id="editImage" value="Edit" />
+                            </apex:outputLink>
+                            &nbsp;
+                            <a onclick="deleteRow"><apex:image id="delImage" value="Delete" /></a>
+                        </apex:column>
+                </apex:pageBlockTable>
+            </apex:pageBlock>
+        </apex:outputPanel>
+        
+        <div class="actionBtnWrapper">
+            <apex:commandButton styleClass="btn" value="Add New" action="/apex/FreeUsageNewAndExisting"/><br/><br/>
+        </div>
+        
+    </apex:form>
+</apex:page>
